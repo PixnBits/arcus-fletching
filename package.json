@@ -1,0 +1,22 @@
+{
+  "name": "arcus-fletching",
+  "description": "uPnP control point",
+  "version": "0.0.1",
+  "homepage": "https://github.com/PixnBits/arcus-fletching",
+  "bugs" : {
+    "url": "https://github.com/PixnBits/arcus-fletching/issues"
+  },
+  "author":{
+    "name": "N Oliver",
+    "email": "i@PixnBits.org"
+  },
+  "main": "uPnpControlPoint.js",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/PixnBits/arcus-fletching.git"
+  },
+  "dependencies": {
+    "libxmljs": "0.9.0",
+    "soap": "*"
+  }
+}
