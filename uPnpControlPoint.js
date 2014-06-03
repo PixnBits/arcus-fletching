@@ -1,17 +1,18 @@
 var dgram = require('dgram');
-var EventEmitter = require('events').EventEmitter
+var EventEmitter = require('events').EventEmitter;
 
+var uPnpRootDevice = require('./lib/uPnpRootDevice').uPnpRootDevice;
+var uPnpDevice = require('./lib/uPnpDevice').uPnpDevice;
 
 var UPNP_BROADCAST_IP = '239.255.255.250';
 var UPNP_BROADCAST_PORT = 1900;
-
-
 var UPNP_DISCOVERY_MESSAGE = 
 	'M-SEARCH * HTTP/1.1'+'\r\n'+
 	'HOST: 239.255.255.250:1900'+'\r\n'+
 	'MAN: "ssdp:discover"'+'\r\n'+
 	'MX: 10'+'\r\n'+
 	'ST: ssdp:all'+'\r\n\r\n';
+
 
 function identity(v){ return v; }
 function proper(str){
@@ -384,49 +385,4 @@ uPnpControlPoint.prototype._pruneExpiredDevices = function(){
 
 
 
-
-
-
-function uPnpDevice(uuid){
-	this.uuid = uuid;
-	//TODO
-}
-
-uPnpDevice.prototype.validTo = function(thenSeconds){
-	// if thenSeconds is less than a year, interpret as the number of seconds to live from now
-	if(thenSeconds < 60*60*24*7*52){
-		thenSeconds += Date.now();
-	}
-
-	this.expires = thenSeconds;
-}
-
-
-function uPnpRootDevice(uuid){
-	this.uuid = uuid;
-	//TODO
-}
-
-// inherit from (regular) device
-uPnpRootDevice.prototype = Object.create(uPnpDevice.prototype);
-
-
-
-//exports.uPnpControlPoint = uPnpControlPoint;
-
-var server = new uPnpControlPoint();
-
-server.on('found', function(device){
-	console.log('found new device!', device);
-});
-
-server.on('updated', function(device){
-	console.log('device updated', device);
-});
-
-server.on('expired', function(device){
-	console.log('device expired', device);
-});
-
-//server.listen();
-server.search();
+exports.uPnpControlPoint = uPnpControlPoint;
