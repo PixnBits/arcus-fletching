@@ -1,16 +1,17 @@
 var dgram = require('dgram');
 var EventEmitter = require('events').EventEmitter;
 
-var uPnpRootDevice = require('./lib/uPnpRootDevice').uPnpRootDevice;
-var uPnpDevice = require('./lib/uPnpDevice').uPnpDevice;
+var uPnpRootDevice = require('./lib/uPnpRootDevice');
+var uPnpDevice = require('./lib/uPnpDevice');
 
 var UPNP_BROADCAST_IP = '239.255.255.250';
 var UPNP_BROADCAST_PORT = 1900;
-var UPNP_DISCOVERY_MESSAGE = 
+var UPNP_DISCOVERY_MESSAGE =
 	'M-SEARCH * HTTP/1.1'+'\r\n'+
 	'HOST: 239.255.255.250:1900'+'\r\n'+
 	'MAN: "ssdp:discover"'+'\r\n'+
-	'MX: 10'+'\r\n'+
+//	'MX: 10'+'\r\n'+
+	'MX: 1'+'\r\n'+
 	'ST: ssdp:all'+'\r\n\r\n';
 
 
@@ -324,10 +325,11 @@ uPnpControlPoint.prototype._addDeviceByAdvertisement = function(advertisement){
 
 	if(usn.uuid){
 		if(!this.rootDevices[usn.uuid]){
-			this.rootDevices[usn.uuid] = new uPnpRootDevice(usn.uuid);
+			this.rootDevices[usn.uuid] = new uPnpRootDevice(usn.uuid, advertisement);
 			this.emit('found', this.rootDevices[usn.uuid]);
 		}else{
 			// just update?
+			//TODO update
 			this.emit('updated', this.rootDevices[usn.uuid]);
 		}
 	}else{
@@ -385,4 +387,4 @@ uPnpControlPoint.prototype._pruneExpiredDevices = function(){
 
 
 
-exports.uPnpControlPoint = uPnpControlPoint;
+module.exports = uPnpControlPoint;

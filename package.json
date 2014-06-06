@@ -2,6 +2,16 @@
   "name": "arcus-fletching",
   "description": "uPnP control point",
   "version": "0.0.1",
+  "keywords" : [
+  	"uPnP",
+  	"SSDP",
+  	"SCPD",
+  	"DCP",
+  	"device",
+  	"rootDevice",
+  	"service",
+  	"control point"
+  ],
   "homepage": "https://github.com/PixnBits/arcus-fletching",
   "bugs" : {
     "url": "https://github.com/PixnBits/arcus-fletching/issues"
@@ -16,7 +26,8 @@
     "url" : "https://github.com/PixnBits/arcus-fletching.git"
   },
   "dependencies": {
-    "libxmljs": "0.9.0",
+    "xml2object": "0.1.x",
+    "q" : "1.0.x",
     "soap": "*"
   }
 }
