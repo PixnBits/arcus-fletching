@@ -26,7 +26,7 @@
     "url" : "https://github.com/PixnBits/arcus-fletching.git"
   },
   "dependencies": {
-    "xml2object": "0.1.x",
+    "xml2object": "~0.1.2",
     "q" : "1.0.x",
     "soap": "*"
   }
