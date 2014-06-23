@@ -28,6 +28,5 @@
   "dependencies": {
     "xml2object": "~0.1.2",
     "q" : "1.0.x",
-    "soap": "*"
   }
 }
